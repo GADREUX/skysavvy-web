@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treinamento · Setor Emergencial VIP</title>
+  <meta name="description" content="Manual de treinamento interativo do Setor Emergencial VIP — procedimentos, monitoramentos, emissões e mais." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-container">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="logo-icon">✈</div>
+        <div>
+          <div class="logo-text">Emergencial VIP</div>
+          <div class="logo-subtitle">Manual de Treinamento</div>
+        </div>
+      </div>
+      <div class="sidebar-progress">
+        <div class="progress-label">
+          <span>Progresso</span>
+          <span class="progress-percent" id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-search">
+      <div class="search-input-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+        </svg>
+        <input class="search-input" id="searchInput" type="text" placeholder="Buscar tópico..." />
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-section-label">Módulos</div>
+      <div class="nav-item active" data-target="s1" onclick="navigateTo('s1',this)">
+        <span class="nav-icon">🚀</span>
+        <span class="nav-text">Ações Iniciais</span>
+        <span class="nav-check" id="chk-s1"></span>
+      </div>
+      <div class="nav-item" data-target="s2" onclick="navigateTo('s2',this)">
+        <span class="nav-icon">📡</span>
+        <span class="nav-text">Monitoramentos</span>
+        <span class="nav-check" id="chk-s2"></span>
+      </div>
+      <div class="nav-item" data-target="s3" onclick="navigateTo('s3',this)">
+        <span class="nav-icon">🎫</span>
+        <span class="nav-text">Cartões de Embarque</span>
+        <span class="nav-check" id="chk-s3"></span>
+      </div>
+      <div class="nav-item" data-target="s4" onclick="navigateTo('s4',this)">
+        <span class="nav-icon">💳</span>
+        <span class="nav-text">Qual Tarifa Emitir?</span>
+        <span class="nav-check" id="chk-s4"></span>
+      </div>
+      <div class="nav-item" data-target="s5" onclick="navigateTo('s5',this)">
+        <span class="nav-icon">🖥️</span>
+        <span class="nav-text">Como Emitir</span>
+        <span class="nav-check" id="chk-s5"></span>
+      </div>
+      <div class="nav-item" data-target="s6" onclick="navigateTo('s6',this)">
+        <span class="nav-icon">💬</span>
+        <span class="nav-text">Envio de Cotações</span>
+        <span class="nav-check" id="chk-s6"></span>
+      </div>
+      <div class="nav-item" data-target="s7" onclick="navigateTo('s7',this)">
+        <span class="nav-icon">🔵</span>
+        <span class="nav-text">Reserva LATAM</span>
+        <span class="nav-check" id="chk-s7"></span>
+      </div>
+      <div class="nav-item" data-target="s8" onclick="navigateTo('s8',this)">
+        <span class="nav-icon">✅</span>
+        <span class="nav-text">Emissão LATAM + CTM</span>
+        <span class="nav-check" id="chk-s8"></span>
+      </div>
+      <div class="nav-item" data-target="s9" onclick="navigateTo('s9',this)">
+        <span class="nav-icon">📄</span>
+        <span class="nav-text">Envio de Vouchers</span>
+        <span class="nav-check" id="chk-s9"></span>
+      </div>
+      <div class="nav-item" data-target="s10" onclick="navigateTo('s10',this)">
+        <span class="nav-icon">🛂</span>
+        <span class="nav-text">TSA e Milhagens</span>
+        <span class="nav-check" id="chk-s10"></span>
+      </div>
+      <div class="nav-item" data-target="s11" onclick="navigateTo('s11',this)">
+        <span class="nav-icon">💰</span>
+        <span class="nav-text">Centro de Custo – Bacci</span>
+        <span class="nav-check" id="chk-s11"></span>
+      </div>
+      <div class="nav-item" data-target="s12" onclick="navigateTo('s12',this)">
+        <span class="nav-icon">🐕</span>
+        <span class="nav-text">SSR SVAN – Malibu</span>
+        <span class="nav-check" id="chk-s12"></span>
+      </div>
+      <div class="nav-item" data-target="s13" onclick="navigateTo('s13',this)">
+        <span class="nav-icon">📋</span>
+        <span class="nav-text">Obs. Tripcases</span>
+        <span class="nav-check" id="chk-s13"></span>
+      </div>
+      <div class="nav-item" data-target="s14" onclick="navigateTo('s14',this)">
+        <span class="nav-icon">🏨</span>
+        <span class="nav-text">Hotéis – Exemplo</span>
+        <span class="nav-check" id="chk-s14"></span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main-content">
+
+    <header class="main-header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <div class="breadcrumb">
+          <span>Emergencial VIP</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current" id="breadcrumbCurrent">Ações Iniciais</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-btn btn-outline" onclick="expandAll()">Expandir Tudo</button>
+        <button class="header-btn btn-gold" onclick="collapseAll()">Recolher Tudo</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-badge">✦ Manual Oficial</div>
+        <h1>Setor Emergencial VIP</h1>
+        <p>Manual de treinamento completo com procedimentos operacionais, guias de emissão e vídeos explicativos para a equipe do setor.</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">14</div>
+            <div class="hero-stat-label">Módulos</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value" id="completedCount">0</div>
+            <div class="hero-stat-label">Concluídos</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">VIP</div>
+            <div class="hero-stat-label">Nível</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S1 — AÇÕES INICIAIS ══ -->
+      <div class="section" id="s1">
+        <div class="section-header expanded" onclick="toggleSection('body-s1', this)">
+          <div class="section-number">01</div>
+          <span class="section-icon">🚀</span>
+          <div class="section-title-group">
+            <div class="section-title">Ações Iniciais</div>
+            <div class="section-subtitle">Rotina de início de turno</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body open" id="body-s1">
+          <div class="content-block">
+            <h4>📣 Microsoft Teams</h4>
+            <ul>
+              <li>Verificar as mensagens do Teams assim que iniciar o turno.</li>
+              <li>Identificar se existem pendências ou solicitações em aberto.</li>
+              <li>Responder ou encaminhar conforme a prioridade.</li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <h4>📊 Planilha de Viagens</h4>
+            <ul>
+              <li>Acessar a planilha de controle e verificar se existe algum voo a ser monitorado no turno.</li>
+              <li>Checar as colunas de data/horário e status de emissão.</li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <h4>📧 E-mails</h4>
+            <ul>
+              <li>Verificar todos os e-mails recebidos e enviados.</li>
+              <li>Responder a todos os e-mails pendentes.</li>
+              <li>Caso não seja possível responder imediatamente, enviar um <strong>follow up</strong> para a secretária informando que o e-mail foi visualizado e será respondido em breve.</li>
+            </ul>
+          </div>
+          <div class="info-card important">
+            <div class="info-card-title">ℹ️ Importante</div>
+            <p>Nunca deixe um e-mail sem resposta. Mesmo que ainda não tenha a solução, o follow up é obrigatório para manter a comunicação com as secretárias.</p>
+          </div>
+          <div class="read-check" onclick="markRead('s1', this)">
+            <div class="read-check-box" id="rc-s1">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S2 — MONITORAMENTOS ══ -->
+      <div class="section" id="s2">
+        <div class="section-header" onclick="toggleSection('body-s2', this)">
+          <div class="section-number">02</div>
+          <span class="section-icon">📡</span>
+          <div class="section-title-group">
+            <div class="section-title">Monitoramentos</div>
+            <div class="section-subtitle">Quem recebe e como monitorar</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s2">
+          <div class="content-block">
+            <h4>👥 Secretárias que <span style="color:#ef4444">NÃO</span> recebem monitoramento</h4>
+            <div class="people-grid">
+              <div class="person-card"><div class="person-avatar">MF</div><div><div class="person-name">Mirella Freitas</div><div class="person-role">VP Grazielle Parenti</div></div></div>
+              <div class="person-card"><div class="person-avatar">MF</div><div><div class="person-name">Maria de Fátima</div><div class="person-role">Conselho Fiscal</div></div></div>
+            </div>
+          </div>
+          <div class="info-card warning">
+            <div class="info-card-title">⚠️ Atenção</div>
+            <p>Mesmo não recebendo o monitoramento pelo canal padrão, os voos dessas secretárias <strong>precisam ser monitorados</strong> nos seguintes sites:</p>
+          </div>
+          <div class="content-block">
+            <h4>🌐 Sites de Monitoramento</h4>
+            <ul>
+              <li><strong>Status de Voo – GOL</strong> — verificar diretamente no site da GOL</li>
+              <li><strong>Status de Voo – LATAM</strong> — verificar diretamente no site da LATAM</li>
+              <li><strong>Flight Aware</strong> — para voos GOL, LATAM, AZUL e voos <strong>internacionais</strong></li>
+            </ul>
+          </div>
+          <div class="info-card tip">
+            <div class="info-card-title">✅ Demais Secretárias</div>
+            <p>Todas as demais secretárias <strong>recebem os monitoramentos até o pouso do voo</strong>.</p>
+          </div>
+          <div class="read-check" onclick="markRead('s2', this)">
+            <div class="read-check-box" id="rc-s2">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S3 — CARTÕES DE EMBARQUE ══ -->
+      <div class="section" id="s3">
+        <div class="section-header" onclick="toggleSection('body-s3', this)">
+          <div class="section-number">03</div>
+          <span class="section-icon">🎫</span>
+          <div class="section-title-group">
+            <div class="section-title">Cartões de Embarque</div>
+            <div class="section-subtitle">Procedimento de envio e passageiros elegíveis</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s3">
+          <div class="content-block">
+            <h4>🟠 Verificação na Planilha</h4>
+            <p>Caso algum nome na planilha de viagens esteja destacado em <strong style="color:#f97316">laranja</strong>, siga o procedimento abaixo:</p>
+            <ul>
+              <li>Verificar se o check-in já está aberto.</li>
+              <li>Realizar o check-in e enviar o cartão de embarque para a secretária responsável.</li>
+              <li>Após o envio, <strong>informar pelo Teams</strong> que o cartão de embarque do passageiro foi enviado.</li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <h4>👤 Passageiros que Recebem o Cartão de Embarque</h4>
+            <div class="passenger-card">
+              <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <div><div class="passenger-name">Gustavo Pimenta</div></div>
+              </div>
+              <div class="secretary-info">
+                <div class="secretary-label">Secretária</div>
+                <div class="secretary-name">Gabriela Diettrich</div>
+              </div>
+            </div>
+            <div class="passenger-card" style="flex-direction:column;align-items:flex-start;gap:10px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+                <div class="passenger-info">
+                  <div class="passenger-icon">👤</div>
+                  <div><div class="passenger-name">Sami Arap Sobrinho</div></div>
+                </div>
+                <div class="secretary-info">
+                  <div class="secretary-label">Secretária</div>
+                  <div class="secretary-name">Amanda Cunha</div>
+                </div>
+              </div>
+              <div class="info-card warning" style="margin:0;width:100%;">
+                <div class="info-card-title">⚠️ Atenção</div>
+                <p>Enviar também o cartão de embarque da esposa: <strong>Andrea Arap</strong>.</p>
+              </div>
+            </div>
+            <div class="passenger-card">
+              <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <div><div class="passenger-name">Rogerio Tavares Nogueira</div></div>
+              </div>
+              <div class="secretary-info">
+                <div class="secretary-label">Secretária</div>
+                <div class="secretary-name">Vivian Souza</div>
+              </div>
+            </div>
+            <div class="passenger-card">
+              <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <div><div class="passenger-name">Daniel Andre Stieler</div></div>
+              </div>
+              <div class="secretary-info">
+                <div class="secretary-label">Secretária</div>
+                <div class="secretary-name">Leila Maia</div>
+              </div>
+            </div>
+          </div>
+          <div class="read-check" onclick="markRead('s3', this)">
+            <div class="read-check-box" id="rc-s3">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S4 — QUAL TARIFA EMITIR ══ -->
+      <div class="section" id="s4">
+        <div class="section-header" onclick="toggleSection('body-s4', this)">
+          <div class="section-number">04</div>
+          <span class="section-icon">💳</span>
+          <div class="section-title-group">
+            <div class="section-title">Emissões nas Cias Aéreas — Qual Tarifa?</div>
+            <div class="section-subtitle">Regras de tarifas por companhia</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s4">
+          <div class="content-block">
+            <h4>🏆 Regra Geral — VPs, Conselheiros e Convidados</h4>
+            <p>Sempre emitir nas <strong>tarifas mais flexíveis</strong> disponíveis:</p>
+            <table class="tariff-table">
+              <thead>
+                <tr><th>Companhia</th><th>Tarifa</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>🔵 LATAM</td><td><span class="tariff-badge">Premium Economy</span></td></tr>
+                <tr><td>🟠 GOL</td><td><span class="tariff-badge">Max</span></td></tr>
+                <tr><td>🔷 AZUL</td><td><span class="tariff-badge">Mais Azul</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="content-block">
+            <h4>💺 Programa de Milhas e Assentos</h4>
+            <ul>
+              <li>Sempre inserir o programa de milhas do passageiro.</li>
+              <li>Marcar os assentos conforme a preferência do passageiro — informações disponíveis no perfil deles.</li>
+            </ul>
+          </div>
+          <div class="info-card warning">
+            <div class="info-card-title">⚠️ Exceção</div>
+            <p>Se a secretária solicitar uma tarifa diferente, emitir na tarifa que foi solicitada.</p>
+          </div>
+          <div class="info-card important">
+            <div class="info-card-title">ℹ️ Cabine PE LATAM indisponível</div>
+            <p>Caso não haja disponibilidade na cabine Premium Economy da LATAM ou os assentos não estiverem de acordo com a preferência do passageiro:</p>
+            <ul style="margin-top:8px;padding-left:20px;list-style:disc;color:#a0a0b8;font-size:13px;">
+              <li>Informar à secretária qual assento está disponível.</li>
+              <li>Questionar se podemos seguir com a emissão mesmo assim.</li>
+              <li>Informar que acompanharemos o voo para melhorar os assentos.</li>
+              <li>Inserir observações importantes na planilha ou informar pelo Teams.</li>
+            </ul>
+          </div>
+          <div class="read-check" onclick="markRead('s4', this)">
+            <div class="read-check-box" id="rc-s4">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S5 — COMO EMITIR ══ -->
+      <div class="section" id="s5">
+        <div class="section-header" onclick="toggleSection('body-s5', this)">
+          <div class="section-number">05</div>
+          <span class="section-icon">🖥️</span>
+          <div class="section-title-group">
+            <div class="section-title">Como Emitir</div>
+            <div class="section-subtitle">Sistemas e regras de localizador</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s5">
+          <div class="content-block">
+            <h4>🖥️ Sistemas de Emissão</h4>
+            <ul>
+              <li><strong>GOL</strong> → Sabre GOL (direto)</li>
+              <li><strong>LATAM</strong> → E-LATAM (direto)</li>
+              <li><strong>AZUL</strong> → Azul B2B (direto)</li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <h4>📋 Regras de Localizador</h4>
+          </div>
+          <div class="info-card important">
+            <div class="info-card-title">👑 VPs — Localizadores Separados</div>
+            <p>Para os VPs, quando houver ida e volta na <strong>mesma companhia</strong>, priorizar a emissão em <strong>localizadores separados</strong>:<br/>→ 1 localizador para a IDA<br/>→ 1 localizador para a VOLTA</p>
+          </div>
+          <div class="info-card warning">
+            <div class="info-card-title">⚠️ Regra especial — Secretária Mirella</div>
+            <p><strong>Todas as emissões da Mirella</strong> devem ser em localizadores separados, independente do passageiro ser a VP Grazielle ou qualquer outro passageiro.</p>
+          </div>
+          <div class="info-card tip">
+            <div class="info-card-title">🤝 Conselheiros e Convidados</div>
+            <p>Para conselheiros e convidados, <strong>não há orientação de localizadores separados</strong>. Se ida e volta for na mesma companhia, pode ser feito no mesmo localizador — <em>a menos que a secretária solicite separado</em>.</p>
+          </div>
+          <div class="read-check" onclick="markRead('s5', this)">
+            <div class="read-check-box" id="rc-s5">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S6 — ENVIO DE COTAÇÕES ══ -->
+      <div class="section" id="s6">
+        <div class="section-header" onclick="toggleSection('body-s6', this)">
+          <div class="section-number">06</div>
+          <span class="section-icon">💬</span>
+          <div class="section-title-group">
+            <div class="section-title">Envio de Cotações</div>
+            <div class="section-subtitle">Como enviar cotações para as secretárias</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s6">
+          <div class="content-block">
+            <p>Assista ao vídeo explicativo sobre como preparar e enviar cotações corretamente.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Envio de Cotação Padrão</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/HKfJH5F2fak" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s6', this)">
+            <div class="read-check-box" id="rc-s6">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S7 — RESERVA LATAM ══ -->
+      <div class="section" id="s7">
+        <div class="section-header" onclick="toggleSection('body-s7', this)">
+          <div class="section-number">07</div>
+          <span class="section-icon">🔵</span>
+          <div class="section-title-group">
+            <div class="section-title">Reserva LATAM</div>
+            <div class="section-subtitle">Como fazer a reserva na LATAM</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s7">
+          <div class="content-block">
+            <p>Assista ao vídeo mostrando como realizar uma reserva diretamente no sistema da LATAM.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Reserva LATAM</div>
+          <div class="video-container">
+            <video controls style="width:100%;aspect-ratio:16/9;display:block;background:#000;">
+              <source src="videos/reserva-latam.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+          </div>
+          <div class="read-check" onclick="markRead('s7', this)">
+            <div class="read-check-box" id="rc-s7">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S8 — EMISSÃO LATAM + CTM ══ -->
+      <div class="section" id="s8">
+        <div class="section-header" onclick="toggleSection('body-s8', this)">
+          <div class="section-number">08</div>
+          <span class="section-icon">✅</span>
+          <div class="section-title-group">
+            <div class="section-title">Emissão LATAM e Registro no CTM</div>
+            <div class="section-subtitle">Emissão completa e integração com o CTM</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s8">
+          <div class="content-block">
+            <p>Assista ao vídeo mostrando como realizar a emissão completa na LATAM e como registrar corretamente no CTM.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Emissão E-LATAM + Registro no CTM</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/WSxvktMjMrw" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s8', this)">
+            <div class="read-check-box" id="rc-s8">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S9 — ENVIO DE VOUCHERS ══ -->
+      <div class="section" id="s9">
+        <div class="section-header" onclick="toggleSection('body-s9', this)">
+          <div class="section-number">09</div>
+          <span class="section-icon">📄</span>
+          <div class="section-title-group">
+            <div class="section-title">Envio de Vouchers</div>
+            <div class="section-subtitle">CTM e Tripcase</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s9">
+          <div class="content-block">
+            <p>Assista ao vídeo abaixo para aprender como gerar e enviar os vouchers no CTM e no Tripcase.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Exemplo de Trip · Fazendo a Reserva · Inserindo Remarks</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/15ppN5y4YHs" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s9', this)">
+            <div class="read-check-box" id="rc-s9">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S10 — TSA E MILHAGENS ══ -->
+      <div class="section" id="s10">
+        <div class="section-header" onclick="toggleSection('body-s10', this)">
+          <div class="section-number">10</div>
+          <span class="section-icon">🛂</span>
+          <div class="section-title-group">
+            <div class="section-title">Como Inserir TSA e Milhagens no Site da Cia</div>
+            <div class="section-subtitle">Passo a passo no site da companhia aérea</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s10">
+          <div class="content-block">
+            <p>Assista ao vídeo com o tutorial de como inserir o TSA e as informações de programa de milhagens no site da companhia aérea.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Inserir TSA e Milhagens no Site da Companhia</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/e1-ED8r9Ljw" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s10', this)">
+            <div class="read-check-box" id="rc-s10">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S11 — CENTRO DE CUSTO BACCI ══ -->
+      <div class="section" id="s11">
+        <div class="section-header" onclick="toggleSection('body-s11', this)">
+          <div class="section-number">11</div>
+          <span class="section-icon">💰</span>
+          <div class="section-title-group">
+            <div class="section-title">Centro de Custo Internacional — Marcelo Bacci</div>
+            <div class="section-subtitle">Como alterar o centro de custo CC1010322</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s11">
+          <div class="content-block">
+            <div class="info-card important" style="margin-bottom:12px;">
+              <div class="info-card-title">ℹ️ Centro de Custo Internacional</div>
+              <p>Código: <strong>CC1010322</strong> — Centro de custo internacional do Marcelo Bacci.</p>
+            </div>
+            <div class="info-card tip" style="margin-bottom:12px;">
+              <div class="info-card-title">🇳🈁 Centro de Custo Nacional</div>
+              <p>Código: <strong>1010006</strong> — Já vem preenchido automaticamente na OS para viagens nacionais.</p>
+            </div>
+            <p>Assista ao vídeo explicando como alterar o centro de custo corretamente no sistema.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Centro de Custo Internacional – Marcelo Bacci</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/OFYFVt3Z668" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s11', this)">
+            <div class="read-check-box" id="rc-s11">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S12 — SSR SVAN MALIBU ══ -->
+      <div class="section" id="s12">
+        <div class="section-header" onclick="toggleSection('body-s12', this)">
+          <div class="section-number">12</div>
+          <span class="section-icon">🐕</span>
+          <div class="section-title-group">
+            <div class="section-title">Adicionar SSR SVAN — Cachorro Malibu</div>
+            <div class="section-subtitle">Como inserir o código SSR de animal de serviço</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s12">
+          <div class="content-block">
+            <p>Assista ao vídeo ensinando o passo a passo para inserir o SSR SVAN (animal de serviço) no sistema.</p>
+          </div>
+          <div class="video-label">🎬 Vídeo Tutorial — Como Inserir o Malibu nas Reservas</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/hZtaFyfUuuY" allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;display:block;border:none;"></iframe>
+          </div>
+          <div class="read-check" onclick="markRead('s12', this)">
+            <div class="read-check-box" id="rc-s12">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S13 — OBSERVAÇÕES TRIPCASES ══ -->
+      <div class="section" id="s13">
+        <div class="section-header" onclick="toggleSection('body-s13', this)">
+          <div class="section-number">13</div>
+          <span class="section-icon">📋</span>
+          <div class="section-title-group">
+            <div class="section-title">Observações de Tripcases</div>
+            <div class="section-subtitle">Hotéis internacionais e nacionais</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s13">
+          <div class="content-block">
+            <div class="info-card important" style="margin-bottom:12px;">
+              <div class="info-card-title">👑 Tripcase para VPs</div>
+              <p>Somente <strong>viagens internacionais</strong>.</p>
+            </div>
+            <div class="info-card tip">
+              <div class="info-card-title">✅ Tripcase para Conselheiros e Convidados</div>
+              <p>Todas as viagens — <strong>nacionais e internacionais</strong>.</p>
+            </div>
+          </div>
+          <div class="read-check" onclick="markRead('s13', this)">
+            <div class="read-check-box" id="rc-s13">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S14 — EXEMPLO DE FICHAS ══ -->
+      <div class="section" id="s14">
+        <div class="section-header" onclick="toggleSection('body-s14', this)">
+          <div class="section-number">14</div>
+          <span class="section-icon">🏨</span>
+          <div class="section-title-group">
+            <div class="section-title">Exemplo de Fichas</div>
+            <div class="section-subtitle">Modelos de hotel e voo para CTM</div>
+          </div>
+          <div class="section-toggle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+        </div>
+        <div class="section-body" id="body-s14">
+
+          <div class="content-block">
+            <h4>🏨 Exemplo 1 — Hotel em Nova York</h4>
+            <div class="example-block">
+              <div><span class="label">HOTEL</span></div>
+              <div><span class="value">LOTTE NEW YORK PALACE</span></div>
+              <div><span class="label">ENDEREÇO</span> <span class="value">455 MADISON AVENUE, NEW YORK NY 10022</span></div>
+              <div><span class="label">TELEFONE</span> <span class="value">1-877-2608547</span></div>
+              <div><span class="label">TARIFA</span> <span class="value">USD 772.32</span></div>
+              <div><span class="label">CANCELAMENTO</span> <span class="value">1 DIA ANTES DO CHECK-IN</span></div>
+              <div><span class="label">CHECK-IN</span> <span class="value">04PM</span></div>
+              <div><span class="label">CHECK-OUT</span> <span class="value">11AM</span></div>
+            </div>
+          </div>
+
+          <div class="content-block">
+            <h4>✈️ Exemplo 1 — Voo Internacional (Delta)</h4>
+            <div class="example-block">
+              <div><span class="label">VOO</span> <span class="value">DELTA AIRLINES — LAX × JFK</span></div>
+              <div><span class="label">ASSENTO</span> <span class="value">04C</span></div>
+              <div><span class="label">BILHETE</span> <span class="value">0062971507572</span></div>
+              <div><span class="label">TARIFA</span> <span class="value">BRL 9.504,77</span></div>
+              <div><span class="label">TAXAS</span> <span class="value">BRL 798,12</span></div>
+              <div><span class="label">TOTAL</span> <span class="value">BRL 10.302,89</span></div>
+              <div><span class="label">BAGAGEM</span> <span class="value">2 BAGAGENS DE 32KG</span></div>
+              <div><span class="label">REEMBOLSO</span> <span class="value">BILHETE REEMBOLSÁVEL — ALTERAÇÕES PERMITIDAS + DIF. DE TARIFA</span></div>
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <div class="content-block">
+            <h4>🏨 Exemplo 2 — Hotel no CTM</h4>
+            <div class="example-block">
+              <div><span class="label">CATEGORIA</span> <span class="value">SUPERIOR QUEEN</span></div>
+              <div><span class="label">CAFÉ DA MANHÃ</span> <span class="value">INCLUSO</span></div>
+              <div><span class="label">CHECK-IN</span> <span class="value">14H00</span></div>
+              <div><span class="label">CHECK-OUT</span> <span class="value">12H00</span></div>
+              <div><span class="label">CANCELAMENTO</span> <span class="value">24H ANTES DO CHECK-IN (AJUSTAR CONFORME REGRAS DO HOTEL)</span></div>
+            </div>
+          </div>
+
+          <div class="content-block">
+            <h4>✈️ Exemplo 2 — Voo no CTM</h4>
+            <div class="example-block">
+              <div><span class="label">ASSENTO</span> <span class="value">CORREDOR 02D</span></div>
+              <div><span class="label">MILHAGENS</span> <span class="value">INSERIDAS — BLACK SIGNATURE</span></div>
+            </div>
+          </div>
+
+          <div class="content-block">
+            <h4>💳 Emissão com Crédito de Bilhete Não Voado</h4>
+            <p style="font-size:13px;color:#a0a0b8;margin-bottom:12px;">Se o voo for emitido com créditos, adicionar as informações padrão + as linhas abaixo:</p>
+            <div class="example-block">
+              <div><span class="label">EMISSÃO</span> <span class="value">FEITA UTILIZANDO CRÉDITO DE BILHETE NÃO VOADO</span></div>
+              <div><span class="label">VALOR DO CRÉDITO</span> <span class="value">__________</span></div>
+              <div><span class="label">VALOR RESIDUAL PAGO NA EMISSÃO</span> <span class="value">__________</span></div>
+            </div>
+          </div>
+
+          <div class="read-check" onclick="markRead('s14', this)">
+            <div class="read-check-box" id="rc-s14">✓</div>
+            <span class="read-check-label">Marcar módulo como concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="content-footer">
+        <p>Setor <span class="gold">Emergencial VIP</span> · Manual de Treinamento Oficial · <span id="currentYear"></span></p>
+      </footer>
+
+    </div><!-- /content-area -->
+  </main>
+</div><!-- /app-container -->
+
+<!-- ── VIDEO INSERT MODAL ── -->
+<div id="videoModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);">
+  <div style="background:#16161f;border:1px solid rgba(250,204,21,.25);border-radius:16px;padding:32px;max-width:520px;width:90%;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#a0a0b8;font-size:20px;cursor:pointer;">✕</button>
+    <h3 style="font-family:'Outfit',sans-serif;color:#facc15;margin-bottom:20px;font-size:18px;">📹 Inserir Vídeo</h3>
+    <p style="font-size:13px;color:#a0a0b8;margin-bottom:16px;">Cole o link do YouTube ou Vimeo para incorporar o vídeo:</p>
+    <input id="videoUrlInput" type="text" placeholder="https://www.youtube.com/watch?v=..." style="width:100%;padding:12px 16px;background:#1a1a26;border:1px solid rgba(250,204,21,.2);border-radius:8px;color:#f0f0f5;font-size:14px;outline:none;margin-bottom:8px;" />
+    <p style="font-size:12px;color:#6b6b80;margin-bottom:20px;">Aceita links do YouTube, Vimeo ou URL direta de arquivo .mp4</p>
+    <div style="display:flex;gap:12px;">
+      <button onclick="closeModal()" class="header-btn btn-outline" style="flex:1;">Cancelar</button>
+      <button onclick="confirmVideo()" class="header-btn btn-gold" style="flex:1;">✓ Inserir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── State ──
+  const TOTAL = 14;
+  let completed = new Set(JSON.parse(localStorage.getItem('vip-completed') || '[]'));
+  let currentVideoTarget = null;
+  let currentVideoPlaceholder = null;
+
+  // ── Init ──
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  updateProgress();
+  completed.forEach(id => applyChecked(id));
+
+  // Animate sections on load
+  document.querySelectorAll('.section').forEach((s, i) => {
+    setTimeout(() => s.classList.add('visible'), i * 80);
+  });
+
+  // ── Toggle Section ──
+  function toggleSection(bodyId, header) {
+    const body = document.getElementById(bodyId);
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.classList.toggle('expanded', !isOpen);
+  }
+
+  function expandAll() {
+    document.querySelectorAll('.section-body').forEach(b => b.classList.add('open'));
+    document.querySelectorAll('.section-header').forEach(h => h.classList.add('expanded'));
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('.section-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.section-header').forEach(h => h.classList.remove('expanded'));
+  }
+
+  // ── Sidebar & Nav ──
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  });
+
+  function navigateTo(id, navEl) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Open section first so it has height before scrolling
+    const sectionBody = document.getElementById('body-' + id);
+    const sectionHeader = el.querySelector('.section-header');
+    if (sectionBody && !sectionBody.classList.contains('open')) {
+      sectionBody.classList.add('open');
+      if (sectionHeader) sectionHeader.classList.add('expanded');
+    }
+    // Update nav active state
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    navEl.classList.add('active');
+    // Update breadcrumb
+    document.getElementById('breadcrumbCurrent').textContent = navEl.querySelector('.nav-text').textContent;
+    // Close sidebar on mobile
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+    // Scroll using manual offset — more reliable than scrollIntoView with fixed headers
+    setTimeout(() => {
+      const headerH = document.querySelector('.main-header').offsetHeight;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - headerH - 16;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
+  }
+
+  // Observe scroll to auto-highlight nav
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        const navEl = document.querySelector(`.nav-item[data-target="${id}"]`);
+        if (navEl) {
+          document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+          navEl.classList.add('active');
+          document.getElementById('breadcrumbCurrent').textContent = navEl.querySelector('.nav-text').textContent;
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // ── Search ──
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const text = item.querySelector('.nav-text').textContent.toLowerCase();
+      item.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+
+  // ── Mark as Read ──
+  function markRead(sectionId, btn) {
+    const isChecked = btn.classList.toggle('checked');
+    if (isChecked) {
+      completed.add(sectionId);
+    } else {
+      completed.delete(sectionId);
+    }
+    localStorage.setItem('vip-completed', JSON.stringify([...completed]));
+    updateProgress();
+    updateNavCheck(sectionId, isChecked);
+  }
+
+  function applyChecked(sectionId) {
+    const btn = document.querySelector(`#${sectionId} .read-check`);
+    if (btn) btn.classList.add('checked');
+    updateNavCheck(sectionId, true);
+  }
+
+  function updateNavCheck(sectionId, checked) {
+    const chk = document.getElementById('chk-' + sectionId);
+    if (!chk) return;
+    chk.classList.toggle('completed', checked);
+    chk.textContent = checked ? '✓' : '';
+  }
+
+  function updateProgress() {
+    const pct = Math.round((completed.size / TOTAL) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPercent').textContent = pct + '%';
+    document.getElementById('completedCount').textContent = completed.size;
+  }
+
+  // ── Video Insert ──
+  function setVideo(containerId, placeholderId) {
+    currentVideoTarget = containerId;
+    currentVideoPlaceholder = placeholderId;
+    document.getElementById('videoUrlInput').value = '';
+    const modal = document.getElementById('videoModal');
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('videoModal').style.display = 'none';
+    currentVideoTarget = null;
+    currentVideoPlaceholder = null;
+  }
+
+  function confirmVideo() {
+    let url = document.getElementById('videoUrlInput').value.trim();
+    if (!url) { alert('Por favor, insira um link de vídeo.'); return; }
+
+    const container = document.getElementById(currentVideoTarget);
+    if (!container) return;
+
+    let embedHtml = '';
+
+    // YouTube
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+    if (ytMatch) {
+      embedHtml = `<iframe src="https://www.youtube.com/embed/${ytMatch[1]}" allowfullscreen loading="lazy"></iframe>`;
+    }
+    // Vimeo
+    const vmMatch = url.match(/vimeo\.com\/(\d+)/);
+    if (vmMatch) {
+      embedHtml = `<iframe src="https://player.vimeo.com/video/${vmMatch[1]}" allowfullscreen loading="lazy"></iframe>`;
+    }
+    // Direct .mp4 or other video
+    if (!embedHtml) {
+      embedHtml = `<video controls><source src="${url}" type="video/mp4">Seu navegador não suporta vídeo HTML5.</video>`;
+    }
+
+    container.innerHTML = embedHtml;
+    closeModal();
+  }
+
+  // Close modal on backdrop click
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
