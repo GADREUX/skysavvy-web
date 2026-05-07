@@ -1,0 +1,58 @@
+"use client"
+
+/**
+ * SkySavvy brand pattern — three islands in deep ocean.
+ * CSS radial gradients + SVG feTurbulence displacement.
+ * Drops into any positioned container, fills it absolutely.
+ *
+ * scale prop controls coastline wobble intensity:
+ *   900  = full hero (welcome screen, savings hero)
+ *   400  = medium panels (passport card)
+ *   300  = small accents (discovery sidebar)
+ */
+export function IslandPattern({ scale = 900 }: { scale?: number }) {
+  const filterId = `islandNoise-${scale}`
+  return (
+    <div style={{ position: "absolute", inset: 0 }}>
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(180deg, var(--ocean) 75%, var(--ocean-deep) 100%)",
+      }} />
+      <div style={{
+        position: "absolute", inset: 0,
+        filter: `url(#${filterId})`,
+        backgroundImage: `
+          radial-gradient(ellipse 8vmin 10vmin at 20% 25%, var(--land-dark) 0 70%, transparent 71%),
+          radial-gradient(ellipse 16vmin 12vmin at 20% 25%, var(--land) 0 70%, transparent 71%),
+          radial-gradient(ellipse 18vmin 14vmin at 20% 25%, var(--dune) 0 70%, transparent 71%),
+          radial-gradient(ellipse 20vmin 16vmin at 20% 25%, var(--sand) 0 70%, transparent 71%),
+          radial-gradient(ellipse 22vmin 18vmin at 20% 25%, var(--foam) 0 70%, transparent 71%),
+          radial-gradient(ellipse 24vmin 20vmin at 20% 25%, var(--shallow) 0 70%, transparent 71%),
+          radial-gradient(ellipse 6vmin 11vmin at 75% 30%, var(--land-dark) 0 70%, transparent 71%),
+          radial-gradient(ellipse 17vmin 13vmin at 75% 30%, var(--land) 0 70%, transparent 71%),
+          radial-gradient(ellipse 19vmin 15vmin at 75% 30%, var(--dune) 0 70%, transparent 71%),
+          radial-gradient(ellipse 21vmin 17vmin at 75% 30%, var(--sand) 0 70%, transparent 71%),
+          radial-gradient(ellipse 23vmin 19vmin at 75% 30%, var(--foam) 0 70%, transparent 71%),
+          radial-gradient(ellipse 25vmin 21vmin at 75% 30%, var(--shallow) 0 70%, transparent 71%),
+          radial-gradient(ellipse 6vmin 10vmin at 50% 75%, var(--land-dark) 0 70%, transparent 71%),
+          radial-gradient(ellipse 15vmin 12vmin at 50% 75%, var(--land) 0 70%, transparent 71%),
+          radial-gradient(ellipse 17vmin 14vmin at 50% 75%, var(--dune) 0 70%, transparent 71%),
+          radial-gradient(ellipse 19vmin 16vmin at 50% 75%, var(--sand) 0 70%, transparent 71%),
+          radial-gradient(ellipse 21vmin 18vmin at 50% 75%, var(--foam) 0 70%, transparent 71%),
+          radial-gradient(ellipse 23vmin 20vmin at 50% 75%, var(--shallow) 0 70%, transparent 71%),
+          linear-gradient(180deg, #216a94 0%, #194f71 80%)
+        `,
+      }} />
+      {scale !== 900 && (
+        <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
+          <defs>
+            <filter id={filterId}>
+              <feTurbulence result="noise" numOctaves={5} baseFrequency="0.0065" type="fractalNoise" />
+              <feDisplacementMap yChannelSelector="G" xChannelSelector="R" scale={scale} in2="noise" in="SourceGraphic" />
+            </filter>
+          </defs>
+        </svg>
+      )}
+    </div>
+  )
+}

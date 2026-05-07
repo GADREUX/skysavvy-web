@@ -1,0 +1,138 @@
+"use client"
+
+import { useState } from "react"
+import { Sidebar } from "@/components/Sidebar"
+
+const ALERTS = [
+  { origin: "GRU", dest: "LHR", airline: "LATAM", stops: "Direct",     dates: "Aug 14 – Aug 28",   days: "14 days", old: 2820, now: 2480, delta: -12, kind: "drop", when: "4m ago",  group: "Today" },
+  { origin: "GRU", dest: "MAD", airline: "Iberia",stops: "1 stop LIS", dates: "Sep 18 – Sep 30",   days: "12 days", old: 2740, now: 2140, delta: -22, kind: "drop", when: "32m ago", group: "Today" },
+  { origin: "GIG", dest: "CDG", airline: "AF",    stops: "1 stop CDG", dates: "Oct 21 – Nov 04",   days: "14 days", old: 4180, now: 4380, delta: 4.7, kind: "rise", when: "2h ago",  group: "Today" },
+  { origin: "GRU", dest: "LIS", airline: "TAP",   stops: "Direct",     dates: "Nov 09 – Nov 23",   days: "14 days", old: 3280, now: 3260, delta: -0.6,kind: "stable",when: "6h ago", group: "Yesterday" },
+  { origin: "GRU", dest: "FCO", airline: "LATAM", stops: "1 stop GRU", dates: "Dec 02 – Dec 16",   days: "14 days", old: 11500,now: 12480, delta: 8.5, kind: "rise", when: "1d ago",  group: "Yesterday" },
+]
+
+export default function AlertsPage() {
+  const [filter, setFilter] = useState("all")
+
+  const filtered = ALERTS.filter(a =>
+    filter === "all" ||
+    (filter === "drop" && a.kind === "drop") ||
+    (filter === "rise" && (a.kind === "rise"))
+  )
+
+  const totalSaved = ALERTS.filter(a => a.delta < 0).reduce((s, a) => s + (a.old - a.now), 0)
+  const groups = [...new Set(filtered.map(a => a.group))]
+
+  return (
+    <div style={{ display: "flex", minHeight: "100vh" }}>
+      <Sidebar active="alerts" />
+      <main style={{ flex: 1 }}>
+        <header style={{ padding: "26px 32px 18px", borderBottom: "1px solid var(--line)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start" }}>
+            <div>
+              <div className="label" style={{ color: "var(--accent)" }}>Price alerts</div>
+              <h1 style={{ fontSize: 36, marginTop: 4 }}>Alert history</h1>
+              <p style={{ marginTop: 6 }}>Review your recently tracked flight price changes.</p>
+            </div>
+            <div style={{ display: "flex", gap: 10 }}>
+              <div className="card" style={{ padding: "10px 16px", textAlign: "center" }}>
+                <div style={{ fontSize: 11, color: "var(--muted)", fontFamily: "var(--font-sans)", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  Total alerts
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 900, fontFamily: "var(--font-sans)", marginTop: 4 }}>
+                  {ALERTS.length}
+                </div>
+              </div>
+              <div className="card" style={{ padding: "10px 16px", textAlign: "center", background: "var(--good-soft)", borderColor: "transparent" }}>
+                <div style={{ fontSize: 11, color: "var(--good)", fontFamily: "var(--font-sans)", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                  Potential savings
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 900, fontFamily: "var(--font-sans)", color: "var(--good)", marginTop: 4 }}>
+                  +BRL {totalSaved.toLocaleString()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Filters */}
+          <div style={{ display: "flex", gap: 10, marginTop: 18, alignItems: "center" }}>
+            <input placeholder="Route (e.g. GRU – LHR)" style={{ maxWidth: 260, minHeight: 36, fontSize: 13 }} />
+            <select style={{ maxWidth: 160, minHeight: 36, fontSize: 13 }}>
+              <option>Last 30 days</option>
+              <option>Last 7 days</option>
+              <option>Last 90 days</option>
+            </select>
+            <div style={{ display: "flex", gap: 6 }}>
+              {[
+                { id: "all", label: "All" },
+                { id: "drop", label: "Dropped" },
+                { id: "rise", label: "Increased" },
+              ].map(f => (
+                <button key={f.id} onClick={() => setFilter(f.id)} style={{
+                  minHeight: 32, padding: "4px 12px", fontSize: 12, borderRadius: 999,
+                  background: filter === f.id ? "var(--accent)" : "transparent",
+                  color: filter === f.id ? "#fff" : "var(--ink-2)",
+                  border: `1px solid ${filter === f.id ? "var(--accent)" : "var(--line)"}`,
+                }}>
+                  {f.id === "drop" && <span style={{ width: 6, height: 6, borderRadius: "50%", background: filter === f.id ? "#fff" : "var(--good)", display: "inline-block", marginRight: 6 }} />}
+                  {f.id === "rise" && <span style={{ width: 6, height: 6, borderRadius: "50%", background: filter === f.id ? "#fff" : "var(--warn)", display: "inline-block", marginRight: 6 }} />}
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        <div style={{ padding: "22px 32px", display: "grid", gap: 18 }}>
+          {groups.map(group => (
+            <div key={group}>
+              <div className="label" style={{ fontSize: 12, marginBottom: 10, color: "var(--muted)" }}>{group}</div>
+              <div style={{ display: "grid", gap: 10 }}>
+                {filtered.filter(a => a.group === group).map((a, i) => {
+                  const borderColor = a.kind === "drop" ? "var(--good)" : a.kind === "rise" ? "var(--warn)" : "var(--muted-2)"
+                  const deltaColor = a.delta < 0 ? "var(--good)" : a.delta > 0 ? "var(--warn)" : "var(--muted)"
+                  return (
+                    <div key={i} className="card" style={{
+                      padding: "16px 18px 16px 22px",
+                      borderLeft: `3px solid ${borderColor}`,
+                      borderRadius: 8,
+                      display: "grid", gridTemplateColumns: "1.2fr 1fr auto auto",
+                      gap: 16, alignItems: "center",
+                    }}>
+                      <div>
+                        <div style={{ fontWeight: 800, fontSize: 16, fontFamily: "var(--font-sans)" }}>
+                          {a.origin} → {a.dest}
+                        </div>
+                        <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 3 }}>
+                          {a.airline} · {a.stops}
+                        </div>
+                      </div>
+                      <div style={{ fontSize: 13, color: "var(--ink-2)" }}>
+                        <div>{a.dates}</div>
+                        <div style={{ color: "var(--muted)", marginTop: 2, fontSize: 12 }}>{a.days}</div>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <div style={{ fontSize: 13, color: "var(--muted-2)", textDecoration: "line-through", fontFamily: "var(--font-mono)" }}>
+                          BRL {a.old.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 20, fontWeight: 800, fontFamily: "var(--font-mono)", color: a.delta < 0 ? "var(--good)" : "var(--ink)", marginTop: 2 }}>
+                          BRL {a.now.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 11, fontWeight: 700, fontFamily: "var(--font-sans)", color: deltaColor, marginTop: 4 }}>
+                          {a.delta > 0 ? "+" : ""}{a.delta}%
+                        </div>
+                      </div>
+                      <button className="btn--ghost" style={{ minHeight: 36, padding: "6px 14px", fontSize: 12, whiteSpace: "nowrap" }}>
+                        View flight
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  )
+}
